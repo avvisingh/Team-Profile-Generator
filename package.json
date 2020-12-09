@@ -10,6 +10,11 @@
   "scripts": {
     "test": "jest --verbose test/*"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stevetrilogy/unit10hw.git"
@@ -24,6 +29,8 @@
     "inquirer": "^6.3.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-syntax-class-properties": "^7.12.1",
     "jest": "^24.8.0"
   }
 }
