@@ -5,17 +5,17 @@ const inquirer = require("inquirer");
 const chalk = require('chalk');
 const path = require("path");
 const fs = require("fs");
+const getTeamInfo = require('./lib/Prompts.js')
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-let wantsToAddEmployee = true;
+getTeamInfo.getTeamInfo();
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-console.log(chalk.bgYellowBright('Would you like to add an employee?'));
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
