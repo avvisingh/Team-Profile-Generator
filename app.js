@@ -12,8 +12,16 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-getTeamInfo.getTeamInfo();
+async function teamInfoRetrieve() {
+    let teamInfo = await getTeamInfo.getTeamInfo();
 
+    let teamPageHTML = render(teamInfo);
+
+    console.log(teamPageHTML);
+    return teamPageHTML
+}
+
+teamInfoRetrieve();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
