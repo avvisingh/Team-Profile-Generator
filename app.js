@@ -5,6 +5,7 @@ const inquirer = require("inquirer");
 const chalk = require('chalk');
 const path = require("path");
 const fs = require("fs");
+const util = require('util');
 const getTeamInfo = require('./lib/Prompts.js')
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
@@ -12,16 +13,23 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-async function teamInfoRetrieve() {
+
+const writeFileAsync = util.promisify(fs.writeFile);
+
+async function teamPagePrepare() {
     let teamInfo = await getTeamInfo.getTeamInfo();
 
     let teamPageHTML = render(teamInfo);
 
     console.log(teamPageHTML);
-    return teamPageHTML
+
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        fs.mkdirSync(OUTPUT_DIR);
+    }
+    await writeFileAsync(outputPath, teamPageHTML, "utf8");
 }
 
-teamInfoRetrieve();
+teamPagePrepare();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
